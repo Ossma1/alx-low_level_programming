@@ -1,6 +1,8 @@
-#include <stdio.h>
+#include<stdio.h>
 /**
-*les fonction faut ajouter un commentaire 
+*main-Entry point
+*
+*Return:Always 0 (Success)
 */
 int main(void)
 {
