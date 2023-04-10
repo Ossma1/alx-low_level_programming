@@ -1,0 +1,1 @@
+stataic library
