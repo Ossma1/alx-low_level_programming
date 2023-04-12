@@ -1,50 +1,45 @@
 #include <stdlib.h>
-#include "main.h"
+#include "holberton.h"
 
 /**
- * *_realloc - reallocates a memory block using malloc and free
- * @ptr: pointer to the memory previsouly allocated by malloc
- * @old_size: size of the allocated memory for ptr
- * @new_size: new size of the new memory block
- *
- * Return: pointer to the newly allocated memory block
- */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+* *argstostr - concatenates all the arguments of the program
+* @ac: number of arguments
+* @av: array of arguments
+*
+* Return: Pointer to the new string (Success), NULL (Error)
+*/
+char *argstostr(int ac, char **av)
 {
-	char *ptr1;
-	char *old_ptr;
-	unsigned int i;
+	int i, j, k, len;
+	char *str;
 
-	if (new_size == old_size)
-		return (ptr);
-
-	if (new_size == 0 && ptr)
-	{
-		free(ptr);
-		return (NULL);
-	}
-
-	if (!ptr)
-		return (malloc(new_size));
-
-	ptr1 = malloc(new_size);
-	if (!ptr1)
+	if (ac == 0 || av == NULL)
 		return (NULL);
 
-	old_ptr = ptr;
-
-	if (new_size < old_size)
+	for (i = 0; i < ac; i++)
 	{
-		for (i = 0; i < new_size; i++)
-			ptr1[i] = old_ptr[i];
+		for (j = 0; av[i][j] != '\0'; j++)
+			len++;
+		len++;
 	}
 
-	if (new_size > old_size)
-	{
-		for (i = 0; i < old_size; i++)
-			ptr1[i] = old_ptr[i];
-	}
+	str = malloc(sizeof(char) * (len + 1));
 
-	free(ptr);
-	return (ptr1);
+	if (str == NULL)
+		return (NULL);
+
+	k = 0;
+
+	for (i = 0; i < ac; i++)
+	{
+		for (j = 0; av[i][j] != '\0'; j++)
+		{
+			str[k] = av[i][j];
+			k++;
+		}
+		str[k] = '\n';
+		k++;
+	}
+	
+	return (str);
 }
